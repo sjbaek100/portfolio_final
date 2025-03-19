@@ -2,12 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Garamond', serif;
-    color: #eaeaea;
 }
 
 body {
-    background: #0f0f0f;
+    background: #fef3de;
     overflow: hidden;
     height: 100vh;
     display: flex;
@@ -17,6 +15,39 @@ body {
     overflow-y: auto;  
     flex-direction: column; 
 }
+
+/* 카드 배경 통일 (미술관 카드처럼 보이게) */
+.card,
+.additional-leadership-wrapper,
+#additional-leadership-wrapper,
+#additional-leadership-box,.card.leadership,
+.accordion-item {
+    box-shadow:
+    inset 0 0 10px rgba(255, 230, 180, 0.2),  /* 카드 안에서 퍼지는 빛 */
+        0 12px 40px rgba(0, 0, 0, 0.18),
+        0 0 80px rgba(255, 240, 200, 0.4),  /* ✨부드러운 글로우 */
+        0 0 20px rgba(255, 220, 160, 0.2);  /* 안쪽 따뜻한 빛 */
+
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent 40%),
+        linear-gradient(to top, rgba(255, 255, 255, 0.35), transparent 40%),
+        rgba(255, 255, 245, 0.95); /* 카드 배경 */
+                
+    background-blend-mode: screen;
+    backdrop-filter: blur(8px);
+    color: #333333;
+    border: 3px solid rgba(215, 186, 113, 0.6);
+    border-radius: 15px;
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.25));
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  p, li, a, span {
+    font-family: 'DM Sans', sans-serif;
+  }
+
 
 /* 🚪 문 */
     .door-container {
@@ -31,7 +62,7 @@ body {
 }
 
 /* 🚪 문 */
-    .door {
+.door {
     width: 50vw;
     height: 100vh;
     background: linear-gradient(to right, #3a3a3a, #222);
@@ -89,21 +120,22 @@ to { opacity: 1; transform: translateY(0); }
 /*천장등*/
 .ceiling-light {
     position: absolute;
-    top: 0;
+    top: -80px;
     left: 50%;
-    width: 1000px;
-    height: 200px;
     transform: translateX(-50%);
+    width: 800px;
+    height: 400px;
     background: radial-gradient(
-    ellipse at bottom,
-    rgba(255, 255, 255, 0.1) 0%,
+    ellipse at center,
+    rgb(255, 255, 255, 1), 
+    rgb(255, 255, 255, 0.7) ,
     transparent 80%
     );
-    filter: blur(100px);
-    opacity: 0.6;
-    z-index: 1;
-    }
-    
+    filter: blur(80px);
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 0;
+}
 
 .ceiling-light.left {
     left: 20%;
@@ -120,17 +152,17 @@ to { opacity: 1; transform: translateY(0); }
 
 .spotlight {
     position: absolute;
-    top: 5%;
     left: 50%;
     transform: translateX(-50%);
     width: 800px;
-    height: 1000px;
-    background: radial-gradient(ellipse at center, rgba(255,255,255,0.2) 0%, transparent 85%);
     mix-blend-mode: screen;
-    opacity: 0.4;
-    filter: blur(80px);
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.3) 0%, transparent 80%);
+    filter: blur(50px);
+    opacity: 0.5;
+    z-index: 3;
+    top: 10%;
+    height: 1200px;
     pointer-events: none;
-    z-index: 0;
     }
     
 .spotlight::after {
@@ -155,9 +187,10 @@ to { opacity: 1; transform: translateY(0); }
     bottom: 0;
     width: 100%;
     height: 200px;
-    background: radial-gradient(ellipse at center, rgba(255,255,255,0.05), transparent 80%);
-    filter: blur(80px);
-    z-index: 0;
+    background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.08), transparent 80%);
+    filter: blur(100px);
+    opacity: 0.7;
+    z-index: 1;
     pointer-events: none;
 }
     
@@ -196,7 +229,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 perspective: 1200px;
-background: linear-gradient(to bottom, #1b1b1b 0%, #000000 100%);
+background: linear-gradient(to bottom, fef6ed 0%, fef6ed 100%);
 background-size: cover;
 }
 
@@ -220,6 +253,7 @@ transform: scale(1.05); /* 더 크게 확대하고 싶으면 1.1~1.2 조정 가�
     transform-style: preserve-3d;
     align-items: flex-start;
 }
+
 /*카드*/
 .card {
     position: fixed;
@@ -229,52 +263,62 @@ transform: scale(1.05); /* 더 크게 확대하고 싶으면 1.1~1.2 조정 가�
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-    border: 3px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(6px);
     font-weight: bold;
     user-select: none;
     opacity: 0.8;
     transform: scale(0.5);
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(14px);
-    box-shadow:
-    0 0 50px rgba(255,255,255,0.05),
-    0 20px 60px rgba(255,255,255,0.05);
     transform-origin: bottom center;
-    border-radius: 20px;
     transform-style: preserve-3d;
     transition: transform 0.8s ease-in-out, opacity 0.5s ease;
     transition-delay: 0.1s;
     display:grid;
     grid-template-columns: 1fr;
-    font-family: 'Cinzel', serif;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 120px;
+    background: radial-gradient(
+        ellipse at bottom,
+        rgba(255, 255, 255, 0.3),
+        transparent 80%
+    );
+    filter: blur(50px);
+    opacity: 1;
+    pointer-events: none;
+    z-index: 2;
 }
 
 .card::after {
-    content: '';
+    content: "";
     position: absolute;
-    bottom: -100%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: scaleY(-1);
-    background: linear-gradient(to bottom, rgba(255,255,255,0.04), transparent);
-    opacity: 0.06;
-    filter: blur(10px);
-    border-radius: 15px;
-    pointer-events: none;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 50px;
+    background: radial-gradient(ellipse at center, rgba(255, 220, 160, 0.25), transparent 80%);
+    filter: blur(15px);
+    opacity: 0.8;
+    z-index: -1;
 }
 
 .card.active {
     filter: blur(0);
-    box-shadow:
-    0 0 80px rgba(255, 255, 255, 0.2),
-    0 20px 60px rgba(255, 255, 255, 0.08),
-    inset 0 0 120px rgba(255, 255, 255, 0.05);
-    background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
     transform: translateX(0) rotateY(0deg) scale(1);
     opacity: 1;
     z-index: 3;
     display:grid;
+    border-radius: 15px;
+    transform: scale(1.15) translateY(-4px);
+    transition: transform 1s ease-in-out, fill 1s ease-in-out;
+
 }
 
 .card.active::before {
@@ -282,10 +326,10 @@ transform: scale(1.05); /* 더 크게 확대하고 싶으면 1.1~1.2 조정 가�
     position: absolute;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
     top: 0;
     left: 0;
     z-index: -1;
+    border-radius: 15px;
 }
 
 .card.active::after {
@@ -294,41 +338,46 @@ transform: scale(1.05); /* 더 크게 확대하고 싶으면 1.1~1.2 조정 가�
 }
 
 .card.left {
-transform: translateX(-800px) rotateY(60deg) scale(0.8);
-opacity: 0.6;
-display: grid;
+    transform: translateX(-800px) rotateY(60deg) scale(0.8);
+    opacity: 0.6;
+    display: grid;
 }
 
 .card.right {
-transform: translateX(800px) rotateY(-60deg) scale(0.8);
-opacity: 0.6;
-display: grid;
+    transform: translateX(800px) rotateY(-60deg) scale(0.8);
+    opacity: 0.6;
+    display: grid;
 }
 
 
 .card.hidden {
-opacity: 0;
-transform: scale(0.5);
+    opacity: 0;
+    transform: scale(0.5);
+    display: none;
 }
 
 /*=====intro======*/
 
 .firstcard{
-align-items: center;
-justify-content: center;
-text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 .firstcard h1{
-font-size: 44px;
-color: rgb(250, 212, 163);
+    font-size: 44px;
+    color: #e48b32;
+
 }
 .firstcard h2{
-font-size: 35px;
+    font-size: 30px;
 }
 
-.firstcard p{
-font-size: 20px;
+.firstcard p,
+.firstcard span{
+    font-weight: 400;
+    font-size: 20px;
 }
+
 /* icons */
 .icons {
 display: flex;
@@ -372,26 +421,52 @@ text-align: center;
 padding: 2%;
 }
 .secondcard h1{
-font-size: 25px;
-color: rgb(250, 212, 163);
+    font-size: 25px;
+    color: #e48b32;
+
 }
 
 .secondcard h3{
-color: rgb(250, 212, 163);
+    color: #e48b32;
+    font-size: 20px;
 }
 
-.secondcard h2,
-.secondcard h3{
-font-size: 20px;
+.secondcard h2{
+    padding-top: 3%;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1;
+    font-family: 'DM Sans', sans-serif !important;
+
+
 }
 
 .secondcard p{
-font-size: 15px;
+    font-size: 16px;
+    padding-top: 1.5%;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.secondcard p b {
+    font-weight: bold;
 }
 
 .secondcard a {
-font-size: 15px;
+    font-size: 15px;
 }
+
+a.resume-link {
+    text-decoration: none;
+    color: #0056d6;
+    font-weight: 500;
+}
+
+a.resume-link:hover {
+    text-decoration: underline;
+    color: #003eaa;
+    transition: all 1s ease;
+  }
 
 /*======job experience======*/
 .experience-card {
@@ -406,21 +481,20 @@ text-align: left;
 .company-logo {
 width: 80px;
 height: auto;
-border-radius: 12px;
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .experience-text h2 {
 font-size: 28px;
 margin-bottom: 4px;
-color: rgb(250, 212, 163);
+color: #e48b32;
+
 
 }
 
 .experience-text h3 {
 font-size: 20px;
 font-weight: 500;
-color: #ccc;
+color: #5a5a5a;
 margin-bottom: 4px;
 }
 
@@ -428,7 +502,7 @@ margin-bottom: 4px;
 font-size: 14px;
 font-weight: 300;
 margin-bottom: 10px;
-color: #aaa;
+color: #757575;
 }
 
 .experience-text ul {
@@ -436,6 +510,26 @@ font-size: 16px;
 line-height: 1.6;
 padding-left: 20px;
 }
+
+.company-logo.davis{
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+}
+
+.company-logo.kelly {
+    filter: brightness(0) invert(1);
+    width: 60px;
+    height: 60px;
+  }
+  .logo-wrapper {
+    background-color: red;
+    border-radius: 30%;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+  
+
 
 @media (max-width: 768px) {
     .experience-card {
@@ -458,24 +552,19 @@ padding-left: 20px;
     width: 1000px;
     height: auto;
     padding: 5%;
-    margin-top: -30%;
+    margin-top: -20%;
     box-sizing: border-box;
     display: grid;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
-    border-radius: 20px;
     overflow: visible;
-    box-shadow:
-    0 0 50px rgba(255,255,255,0.05),
-    0 20px 60px rgba(255,255,255,0.05);
     overflow: hidden; /* 기본 상태: 스크롤 비활성화 */
 }
 
 .card.leadership h1 {
     font-size: 2.0rem;
     margin-bottom: 30px;
-    color: rgb(250, 212, 163);
+    color: #e48b32;
     font-weight: 600;
     letter-spacing: 1px;
 }
@@ -494,6 +583,7 @@ padding-left: 20px;
     transition: transform 0.4s ease-in-out;
     transform-style: preserve-3d;
     height: 200px;
+
 }
 
 .card4-inner {
@@ -527,6 +617,8 @@ padding-left: 20px;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     transition: all 0.4s ease-in-out;
+    border: 2px solid rgba(215, 186, 113, 0.6);
+
 }
 
 .card4-front {
@@ -537,20 +629,20 @@ padding-left: 20px;
 
 .card4-front h2 {
     font-size: 1.3rem;
-    color: #f0f0f0;
+    color: #000000;
     margin-bottom: 8px;
 }
 
 .card4-front p {
     font-size: 0.95rem;
-    color: #bbb;
+    color: #737373;
 }
 
 .card4-back {
     transform: rotateY(180deg);
     font-size: 0.85rem;
     line-height: 1.3;
-    color: #eee;
+    color: #000000;
     backface-visibility: hidden;
 }
 
@@ -561,7 +653,7 @@ padding-left: 20px;
 .card4-back li {
     margin-bottom: 10px;
     list-style: disc;
-    color: #ddd;
+    color: #000000;
 }
 
 @media (max-width: 600px) {
@@ -598,19 +690,22 @@ padding-left: 20px;
     margin-top: 30px;
     padding-bottom: 20px;
     width: 950px;
+    height: auto;
     background: rgba(255,255,255,0.03);
     backdrop-filter: blur(6px);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     transition: all 0.4s ease;
+    border: 2px solid rgba(215, 186, 113, 0.6);
+
 }
 
 .toggle-additional-btn {
     position: relative;
     background: rgba(255,255,255,0.05);
-    color: #f1f1f1;
-    border: 1px solid rgba(255,255,255,0.2);
+    color: #000000;
+    border: 2px solid rgba(215, 186, 113, 0.6);
     padding: 10px 24px;
     margin-top: 1%;
     margin-left: 40%;
@@ -624,7 +719,7 @@ padding-left: 20px;
 }
 
 .toggle-additional-btn:hover {
-    background: rgba(255, 255, 255, 0.095) !important;
+    background: rgba(215, 186, 113, 0.6) !important;
 }
 
 #additional-leadership-wrapper {
@@ -635,11 +730,11 @@ padding-left: 20px;
     backdrop-filter: blur(10px);
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    border: 2px solid rgba(215, 186, 113, 0.6);
 }
 
 #additional-leadership-wrapper h2 {
     text-align: center;
-    color: rgb(250, 212, 163);
     font-size: 1.8rem;
 }
 
@@ -647,20 +742,20 @@ padding-left: 20px;
 #additional-leadership-box {
     display: none;
     width: 900px;
-    height: 280px;
+    height: auto;
     margin-top: 20px;
     background: rgba(255,255,255,0.04);
     padding-top: 3%;
     padding-left: 5%;
     padding-right: 5%;
-    padding-bottom: 5%;
+    padding-bottom: 10%;
     border-radius: 16px;
     backdrop-filter: blur(8px);
     margin-inline: auto;
     text-align: left;
     animation: fadeSlideUp 0.6s ease-in-out forwards;
-    border: 1px solid rgba(255,255,255,0.08);
-    color: #ccc;
+    border: 2px solid rgba(215, 186, 113, 0.6);
+    color: #000000;
     font-size: 0.95rem;
     line-height: 1.6;
     box-shadow: 0 8px 24px rgba(0,0,0,0.2);
@@ -668,6 +763,7 @@ padding-left: 20px;
 
 #additional-leadership-box li{
     margin-bottom: 2%;
+    font-weight: 200;
 }
 
 #additional-leadership-box,
@@ -675,6 +771,10 @@ padding-left: 20px;
 #additional-leadership-box li:last-child {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
+}
+
+#additional-leadership-box li:last-child {
+    margin-bottom: 3% !important;
 }
 
 @keyframes fadeSlideUp {
@@ -694,7 +794,7 @@ to {
     left: 50%;
     transform: translateX(-50%);
     font-size: 24px;
-    background-color: rgba(255, 255, 255, 0.2);
+    border-color: 0.5px solid rgba(215, 186, 113, 0.6);
     padding: 5px 10px;
     border-radius: 5px;
     z-index: 9999;
@@ -707,35 +807,39 @@ to {
 .esr { background-image: url('ESR.svg'); }
 .stalk { background-image: url('stalk.svg'); }
 .inroute { background-image: url('inroute.svg'); }
-.ksea4cuts { background-image: url('ksealogo_white.png'); }
-.kseaweb { background-image: url('ksealogo_white.png'); }
+.ksea4cuts { background-image: url('ksealogo.svg'); }
+.kseaweb { background-image: url('ksealogo.svg'); }
 
 .card.tech {
     overflow: visible;
 }
 .tech-one {
     margin-left: 10%;
+    margin-top: 7%;
     display: grid;
     grid-template-columns: 1fr;
     gap: 3%;
-    transition: all 0.4s ease;  /* 부드럽게 움직이도록 */
+    transition: all 0.6s ease;  /* 부드럽게 움직이도록 */
 }
 
 .tech-one.move-up {
-    transform: translateY(-110px);
+    transform: translateY(-30px);
     gap: 0%;
-    margin-top: -10%;
 }
 
 .initial-tech-project.move-up {
-  transform: translateY(-30px);
-  transition: transform 0.4s ease;
+    transform: translateY(-10px);
+    transition: transform 0.6s ease;
+    z-index: 999999; 
 }
 
 #toggle-projects-btn.move-up {
-    transform: translateY(-55px);
-    transition: transform 0.4s ease;
-    z-index: 1000;
+    transform: translateY(-35px);
+    transition: transform 0.6s ease;
+    border: 2px solid rgba(215, 186, 113, 0.6);
+    z-index: 999999; 
+    position: relative;
+    pointer-events: auto;
   }
 
 
@@ -748,7 +852,7 @@ to {
 
 .card h4{
     font-size: 44px;
-    color: rgb(250, 212, 163);
+    color: #e48b32;
     }
 
 .tech-projects-container {
@@ -790,7 +894,7 @@ to {
     height: 100%;
     background: linear-gradient(to top, rgb(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
     opacity: 0;
-    transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.6s ease-in-out;
 }
 
 .tech-project-card:hover::before {
@@ -811,7 +915,7 @@ to {
     -1px  1px 5px black, 
     1px  1px 5px black;
     color: white;
-    transition: all 0.4s ease-in-out;
+    transition: all 0.6s ease-in-out;
     white-space: nowrap;  /* 줄바꿈 방지 */
     max-width: 88%;  /* 너무 길어지지 않도록 */
 }
@@ -891,9 +995,8 @@ to {
 
 #toggle-projects-btn {
     position: relative;
+    color: #000000;
     background: rgba(255,255,255,0.05);
-    color: #f1f1f1;
-    border: 1px solid rgba(255,255,255,0.2);
     padding: 10px 24px;
     font-size: 1rem;
     border-radius: 10px;
@@ -905,20 +1008,27 @@ to {
     margin-bottom:-15%;
     width: 250px;
     pointer-events: auto; 
-    z-index: 10000;  
+    z-index: 999999;  
+    border: 2px solid rgba(215, 186, 113, 0.6);
+    outline: none;
+
 }
 
 #toggle-projects-btn:hover {
-    background: rgba(255,255,255,0.3);
+    background: rgba(215, 186, 113, 0.6);
+    border: 2px solid rgba(215, 186, 113, 0.6);
+    outline: none;
+    z-index: 999999; 
 }
 
 .tech-all-projects {
-    position: absolute;
-    top: 75%;
-    left: 43%;
-    transform: translateX(-50%) translateY(20px);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
     z-index: 50;
-    padding: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 50px;
     border-radius: 12px;
     width: 635px;
     opacity: 0;
@@ -933,7 +1043,7 @@ to {
 .tech-all-projects.active {
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(-13%);
 }
 
 .grid {
@@ -945,11 +1055,10 @@ to {
 }
 
 .card.tech.square {
-    aspect-ratio: 1 / 1;
     width: 100%;          /* ✅ 예시로 하나 지정해야 비율이 적용돼 */
     width: 640px;
     height: 640px;
-    margin-top: -30%;
+    margin-top: -20%;
 }
 
 /*======research section===*/
@@ -958,7 +1067,7 @@ to {
     margin-left:5%;
 }
 .research-section h2{
-    color: #f9ca8b;
+    color: #e48b32;
 }
 
 .accordion-item {
@@ -992,7 +1101,7 @@ to {
 }
 
 .accordion-header:hover {
-    color: #f9ca8b;
+    color: #e48b32;
 }
 
 .accordion-header:after {
@@ -1018,16 +1127,19 @@ to {
         opacity 0.4s ease,
         transform 0.4s ease;
     font-size: 0.95rem;
-    color: #f9ca8b;
+    color: #e48b32;
     margin-left: 5%;
 }
 
-.accordion-body li{
+.accordion-body ul li{
     margin-bottom: 2%;
-}
-.accordion-body li, .accordion-body strong{
     font-size: 0.95rem;
-    color: #f9ca8b;
+    font-weight: 500;
+}
+
+.accordion-body strong{
+    font-size: 0.95rem;
+    color: #e48b32;
 }
 
 .accordion-body.open {
@@ -1037,7 +1149,34 @@ to {
 }
 
 .line {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(215, 186, 113, 0.6);
 }
 
     
+.card-instruction {
+    position: fixed;
+    left: 70%;
+    top:85%;
+    text-align: center;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.45);
+    font-style: italic;
+    backdrop-filter: blur(4px);
+    animation: fadeInInstruction 1.5s ease-in-out;
+    z-index: -10;
+    pointer-events: none;
+    font-family: 'Garamond', serif !important;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.18),
+        0 0 80px rgba(255, 240, 200, 0.4),  /* ✨부드러운 글로우 */
+        0 0 20px rgba(255, 220, 160, 0.2);  /* 안쪽 따뜻한 빛 */
+
+  }
+  
+  @keyframes fadeInInstruction {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
