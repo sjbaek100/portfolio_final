@@ -530,22 +530,6 @@ padding-left: 20px;
   }
   
 
-
-@media (max-width: 768px) {
-    .experience-card {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .company-logo {
-        width: 60px;
-    }
-    .experience-text ul {
-        padding-left: 0;
-    }
-}
-
-
 /* ===== Leadership Card Section ===== */
 
 .card.leadership {
@@ -654,15 +638,6 @@ padding-left: 20px;
     margin-bottom: 10px;
     list-style: disc;
     color: #000000;
-}
-
-@media (max-width: 600px) {
-    .card4-inner {
-        height: 280px;
-    }
-    .card4.leadership {
-        padding: 40px 15px;
-    }
 }
 
 .card.leadership.scrollable {
@@ -1179,4 +1154,238 @@ to {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  
+
+/* ===== media =====*/
+@media (max-width: 768px) {
+    body {
+        position: relative;
+        overflow-y: auto;
+        height: auto;
+      }
+
+      .carousel-container {
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        padding-bottom: 100px;
+        flex-direction: column;
+      }
+
+    .carousel {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    transform: none;
+    } 
+    
+    .card {
+      width: 95vw;
+      height: auto;
+      padding: 5%;
+      transform: none !important;
+      scale: 1 !important;
+      font-size: 0.9rem;
+      margin-top: -30%;
+      overflow: visible;
+    }
+
+    .card.tech, .card.tech.active.square{
+        width: 95vw;
+        height: 90vh;
+        transform: none !important;
+        scale: 1 !important;
+        font-size: 0.9rem;
+        margin-top: -60%;
+        overflow: visible;
+    }
+    .additional-leadership-wrapper{
+        margin-bottom: 2%;
+        font-weight: 200;
+        width: 85vw;
+    }
+    #additional-leadership-box li{
+        margin-bottom: 2%;
+        font-weight: 200;
+        width: 65vw;
+        margin-left: 5%;
+    }
+  
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .card.left,
+    .card.right,
+    .card.hidden {
+    display: none;
+    opacity: 0;
+    transform: scale(0.5);
+    }
+    .card.leadership{
+        position: relative;
+        top: -70%;
+    }
+    .leadership-scroll-wrapper h1{
+        font-size: 0.85rem;
+        margin-left:32%;
+    }
+    .card4.zoom{
+        height: 30vw;
+    }
+
+    .card4-inner {
+        position: relative;
+        height: 30vw;
+        width: 80vw;
+        left:3%;
+    }
+    .card4-front h2,
+    .card4-front p {
+      font-size: 0.85rem;
+    }
+  
+    .card4-back li {
+      font-size: 0.8rem;
+    }
+  
+    .toggle-additional-btn {
+      margin-top:5%;
+      margin-left:10%;
+      width: 80%;
+    }
+    .tech-one.move-up{
+        position: relative;
+        left: 5%;
+    }
+    .tech-one{
+        position: relative;
+        left: 5%;
+    }
+
+    .tech-project-wrapper{
+        position: relative;
+        left: 15%;
+    }
+    .tech-project-card {
+      width: 100px;
+      height: 100px;
+    }
+
+    #toggle-projects-btn{
+        position: relative;
+        left: -20%;
+        margin-top: 3%;
+    }
+
+    #toggle-projects-btn.move-up{
+        position: relative;
+        left: -22%;
+        margin-top: 30%;
+    }
+    
+
+    .initial-tech-project{
+        position: relative;
+        left: -25%;
+        gap:1%;
+    }
+    .tech-all-projects{
+        width: 70vw;
+        margin-left: -5%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .tech-project-description {
+      font-size: 10px;
+    }
+  
+    .firstcard h1 {
+      font-size: clamp(22px, 6vw, 36px);
+    }
+  
+    .firstcard p, .firstcard span {
+      font-size: 0.85rem;
+    }
+  
+    .experience-card {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .company-logo {
+      width: 50px;
+      height: auto;
+    }
+  
+    .card-instruction {
+      font-size: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      top: auto;
+      bottom: 10px;
+    }
+  
+    .card.leadership {
+      width: 90vw;
+      padding: 20px;
+      margin-top: 0;
+    }
+  
+    #additional-leadership-box {
+      width: 90%;
+      padding: 20px;
+    }
+  
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .carousel-indicators {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 100;
+      }
+      
+      .carousel-indicators .dot {
+        width: 10px;
+        height: 10px;
+        background-color: #d5b16c;
+        border-radius: 50%;
+        opacity: 0.4;
+        transition: all 0.3s ease;
+      }
+      
+      .carousel-indicators .dot.active {
+        opacity: 1;
+        background-color: #e48b32;
+        transform: scale(1.4);
+      }
+      
+  }
+
+  @media (max-width: 768px) {
+    .desktop-only {
+      display: none;
+    }
+    .card-instruction.mobile-only {
+        display: block;
+        text-align: center;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.45);
+        font-style: italic;
+        margin-top: 40px;
+        font-family: 'Garamond', serif !important;
+      }
+  }
+  @media (min-width: 769px) {
+    .mobile-only {
+      display: none;
+    }
+  }  
   

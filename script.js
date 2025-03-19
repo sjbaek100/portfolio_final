@@ -181,3 +181,52 @@ headers.forEach(header => {
     });
   });
 });
+
+// 📱 터치 스와이프 감지
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const deltaX = touchEndX - touchStartX;
+    if (deltaX > 50) {
+        movePrev(); // 👉 오른쪽으로 스와이프 (이전 카드)
+    } else if (deltaX < -50) {
+        moveNext(); // 👈 왼쪽으로 스와이프 (다음 카드)
+    }
+}
+
+function updateIndicators() {
+    const indicatorContainer = document.getElementById("carousel-indicators");
+    if (!indicatorContainer) return;
+  
+    indicatorContainer.innerHTML = ""; // 초기화
+    cards.forEach((_, index) => {
+      const dot = document.createElement("div");
+      dot.classList.add("dot");
+      if (index === currentIndex) dot.classList.add("active");
+      indicatorContainer.appendChild(dot);
+    });
+  }
+  function updateCarousel() {
+    const total = cards.length;
+    cards.forEach((card, index) => {
+      card.classList.remove("active", "left", "right", "hidden");
+      const position = (index - currentIndex + total) % total;
+      if (position === 0) card.classList.add("active");
+      else if (position === 1) card.classList.add("right");
+      else if (position === total - 1) card.classList.add("left");
+      else card.classList.add("hidden");
+    });
+  
+    updateIndicators(); // ⬅️ 인디케이터 업데이트 추가!
+  }
+    
