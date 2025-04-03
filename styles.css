@@ -1387,5 +1387,9 @@ to {
     .mobile-only {
       display: none;
     }
+    /* 모바일에서 터치가 활성화될 수 있도록 */
+    .carousel-container {
+        touch-action: pan-y; /* 수평 스와이프만 허용 */
+    }
   }  
   

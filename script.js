@@ -186,15 +186,18 @@ headers.forEach(header => {
 let touchStartX = 0;
 let touchEndX = 0;
 
+// 터치 시작
 document.addEventListener("touchstart", (e) => {
     touchStartX = e.changedTouches[0].screenX;
 });
 
+// 터치 끝
 document.addEventListener("touchend", (e) => {
     touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
+    handleSwipe(); // 스와이프 동작 처리
 });
 
+// 스와이프 처리 함수
 function handleSwipe() {
     const deltaX = touchEndX - touchStartX;
     if (deltaX > 50) {
