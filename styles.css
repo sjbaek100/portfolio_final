@@ -571,8 +571,8 @@ padding-left: 20px;
 }
 
 .card4-inner {
-    width: 100%;
-    height: 200px;
+    width: 100% !important;
+    height: 200px !important;
     transition: transform 0.8s ease-in-out;
     transform-style: preserve-3d;
     position: relative;
@@ -772,7 +772,7 @@ to {
     border-color: 0.5px solid rgba(215, 186, 113, 0.6);
     padding: 5px 10px;
     border-radius: 5px;
-    z-index: 9999;
+    z-index: 9999 ;
 }
 
 /*=====tech project =====*/
@@ -790,7 +790,7 @@ to {
 }
 .tech-one {
     margin-left: 10%;
-    margin-top: 7%;
+    margin-top: 7% ;
     display: grid;
     grid-template-columns: 1fr;
     gap: 3%;
@@ -1160,7 +1160,7 @@ to {
 }
 
 /* ===== media =====*/
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     body {
         position: relative;
         overflow-y: auto;
@@ -1234,7 +1234,6 @@ to {
     
     .card .leadership .active .scrollable {
         transform: translateY(50px); /* Adjust to make it feel a bit lower */
-    }
     
     }
     .leadership-scroll-wrapper h1{
@@ -1397,4 +1396,4 @@ to {
     .carousel-container {
         touch-action: pan-y; /* 수평 스와이프만 허용 */
     }
-}  
+}
