@@ -784,6 +784,7 @@ to {
 .inroute { background-image: url('inroute.svg'); }
 .ksea4cuts { background-image: url('ksealogo.svg'); }
 .kseaweb { background-image: url('ksealogo.svg'); }
+.aggiealters { background-image: url('aggiealters.svg'); }
 
 .card.tech {
     overflow: visible;
