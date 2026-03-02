@@ -1,7 +1,7 @@
 console.log("script.js loaded");
 
 function startTyping(onComplete) {
-    const text = "Jiwon (Stephanie) Baek";
+    const text = "Jiwon Baek";
     const target = document.getElementById("typed-text");
     let index = 0;
 
