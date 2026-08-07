@@ -1,210 +1,238 @@
-console.log("script.js loaded");
+/* ==========================================================================
+   JIWON BAEK — THE EVIDENCE GALLERY
+   Vanilla JS: entrance, nav, scroll reveal, metric counters, exhibit rail,
+   and the two expandable "archive" disclosures. No dependencies.
+   ========================================================================== */
 
-function startTyping(onComplete) {
-    const text = "Jiwon Baek";
-    const target = document.getElementById("typed-text");
-    let index = 0;
+document.addEventListener('DOMContentLoaded', () => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!target) return;
+  /* ------------------------------------------------------------------
+     ENTRANCE
+     ------------------------------------------------------------------ */
+  (function entrance() {
+    const el = document.getElementById('entrance');
+    const skipBtn = document.getElementById('entranceSkip');
+    if (!el) return;
 
-    function type() {
-        if (index <= text.length) {
-            target.innerHTML = text.substring(0, index) + '<span class="cursor">|</span>';
-            index++;
-            setTimeout(type, 100);
-        } else {
-            // ⏱ 바로 동시에 실행
-            if (typeof onComplete === "function") onComplete();
+    const alreadySeen = sessionStorage.getItem('entranceShown') === '1';
+    const skipAnimation = reduceMotion || alreadySeen;
 
-            // 🧹 0.5초 후 글자와 커서 제거
-            setTimeout(() => {
-                target.innerHTML = "";
-            }, 500);
-        }
+    const finish = () => {
+      el.classList.add('open');
+      document.body.classList.remove('entrance-lock');
+      sessionStorage.setItem('entranceShown', '1');
+      window.setTimeout(() => {
+        el.classList.add('hidden');
+      }, skipAnimation ? 0 : 720);
+    };
+
+    if (skipAnimation) {
+      el.classList.add('instant');
+      finish();
+      return;
     }
 
-    target.innerHTML = '<span class="cursor">|</span>';
-    type();
-}
+    document.body.classList.add('entrance-lock');
+    // Kick off the word-cycle animation.
+    requestAnimationFrame(() => el.classList.add('play'));
 
+    const AUTO_DISMISS_MS = 1300;
+    let dismissed = false;
+    const timer = window.setTimeout(() => {
+      if (!dismissed) { dismissed = true; finish(); }
+    }, AUTO_DISMISS_MS);
 
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const doorContainer = document.querySelector(".door-container");
-    const carouselContainer = document.querySelector(".carousel-container");
-    const carousel = document.querySelector(".carousel");
-    const cards = Array.from(carousel.children);
-    let currentIndex = 0;
-    
-
-    // 🟢 타이핑 → 문열기 → 캐러셀 등장 → 문 숨기기
-    startTyping(() => {
-        // ✨ 동시에 실행!
-        doorContainer.classList.add("open");
-        carouselContainer.classList.add("show");
-        updateCarousel();
-    
-        // 🔁 문 제거는 약간의 딜레이 후
-        setTimeout(() => {
-            doorContainer.style.display = "none";
-        }, 1500);
+    skipBtn.addEventListener('click', () => {
+      if (dismissed) return;
+      dismissed = true;
+      window.clearTimeout(timer);
+      finish();
     });
-    
+  })();
 
-    function updateCarousel() {
-        const total = cards.length;
-        cards.forEach((card, index) => {
-            card.classList.remove("active", "left", "right", "hidden");
-            const position = (index - currentIndex + total) % total;
-            if (position === 0) card.classList.add("active");
-            else if (position === 1) card.classList.add("right");
-            else if (position === total - 1) card.classList.add("left");
-            else card.classList.add("hidden");
+  /* ------------------------------------------------------------------
+     NAV — scrolled state, mobile toggle, active-link tracking
+     ------------------------------------------------------------------ */
+  (function nav() {
+    const navEl = document.getElementById('siteNav');
+    const toggle = document.getElementById('navToggle');
+    const mobile = document.getElementById('navMobile');
+    if (!navEl) return;
+
+    const onScroll = () => {
+      navEl.classList.toggle('scrolled', window.scrollY > 12);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    if (toggle && mobile) {
+      toggle.addEventListener('click', () => {
+        const isOpen = mobile.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      });
+      mobile.querySelectorAll('a').forEach((a) => {
+        a.addEventListener('click', () => {
+          mobile.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open menu');
         });
+      });
     }
 
-    function moveNext() {
-        currentIndex = (currentIndex + 1) % cards.length;
-        updateCarousel();
+    const sectionIds = ['gallery', 'experience', 'about', 'contact'];
+    const links = Array.from(document.querySelectorAll('.nav-links a'));
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    if ('IntersectionObserver' in window && sections.length) {
+      const spy = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            links.forEach((l) => l.classList.remove('active'));
+            const match = links.find((l) => l.getAttribute('href') === `#${entry.target.id}`);
+            if (match) match.classList.add('active');
+          });
+        },
+        { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+      );
+      sections.forEach((s) => spy.observe(s));
+    }
+  })();
+
+  /* ------------------------------------------------------------------
+     SCROLL REVEAL
+     ------------------------------------------------------------------ */
+  (function reveal() {
+    const items = document.querySelectorAll('.reveal');
+    if (!items.length) return;
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      items.forEach((el) => el.classList.add('is-visible'));
+      return;
     }
 
-    function movePrev() {
-        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-        updateCarousel();
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+    );
+    items.forEach((el) => io.observe(el));
+  })();
+
+  /* ------------------------------------------------------------------
+     METRIC COUNTERS
+     ------------------------------------------------------------------ */
+  (function counters() {
+    const counters = document.querySelectorAll('.count');
+    if (!counters.length) return;
+
+    const animate = (el) => {
+      const target = parseInt(el.dataset.count, 10) || 0;
+      if (reduceMotion) { el.textContent = target; return; }
+
+      const duration = 1100;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target);
+        if (progress < 1) requestAnimationFrame(tick);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(tick);
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      counters.forEach(animate);
+      return;
     }
 
-    // 🔄 드래그
-    let isDragging = false;
-    let startX = 0;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+    counters.forEach((el) => io.observe(el));
+  })();
 
-    document.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        startX = e.clientX;
+  /* ------------------------------------------------------------------
+     EXHIBIT RAIL — arrow controls + current-index counter
+     ------------------------------------------------------------------ */
+  (function exhibitRail() {
+    const track = document.getElementById('railTrack');
+    const prev = document.querySelector('.rail-prev');
+    const next = document.querySelector('.rail-next');
+    const counter = document.getElementById('railCurrent');
+    if (!track) return;
+
+    const cards = Array.from(track.children);
+
+    const scrollByCard = (dir) => {
+      const card = cards[0];
+      if (!card) return;
+      const amount = card.getBoundingClientRect().width + 22; // gap
+      track.scrollBy({ left: dir * amount, behavior: reduceMotion ? 'auto' : 'smooth' });
+    };
+
+    prev && prev.addEventListener('click', () => scrollByCard(-1));
+    next && next.addEventListener('click', () => scrollByCard(1));
+
+    if (counter && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+              const idx = cards.indexOf(entry.target);
+              if (idx > -1) counter.textContent = String(idx + 1).padStart(2, '0');
+            }
+          });
+        },
+        { root: track, threshold: [0.6] }
+      );
+      cards.forEach((c) => io.observe(c));
+    }
+  })();
+
+  /* ------------------------------------------------------------------
+     EXPANDABLE DISCLOSURES — Data & Analytics Archive / Beyond Work
+     ------------------------------------------------------------------ */
+  function wireToggle(btnId, boxId, labelExpand, labelCollapse) {
+    const btn = document.getElementById(btnId);
+    const box = document.getElementById(boxId);
+    const label = btn && btn.querySelector('.toggle-icon') && btn.querySelector('.toggle-icon').nextSibling;
+    if (!btn || !box || !label) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      box.hidden = isOpen;
+      label.textContent = ` ${isOpen ? labelExpand : labelCollapse}`;
     });
+  }
 
-    document.addEventListener("mouseup", (e) => {
-        if (!isDragging) return;
-        isDragging = false;
-        const deltaX = e.clientX - startX;
-        if (deltaX < -50) {
-            moveNext();
-        } else if (deltaX > 50) {
-            movePrev();
-        }
-    });
+  wireToggle('archiveToggle', 'archiveBox', 'View additional analytical work', 'Hide additional analytical work');
+  wireToggle('beyondToggle', 'beyondBox', 'View earlier leadership', 'Hide earlier leadership');
 
-    // ⬅️ ➡️ 키보드
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowRight") {
-            moveNext();
-        } else if (e.key === "ArrowLeft") {
-            movePrev();
-        }
-    });
-
-    updateCarousel();
-    
-// 📱 터치 스와이프 감지
-let touchStartX = 0;
-let touchEndX = 0;
-
-// 터치 시작
-document.addEventListener("touchstart", (e) => {
-    touchStartX = e.changedTouches[0].screenX;
+  /* ------------------------------------------------------------------
+     FOOTER YEAR
+     ------------------------------------------------------------------ */
+  const yearEl = document.getElementById('footerYear');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
-
-// 터치 끝
-document.addEventListener("touchend", (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe(); // 스와이프 동작 처리
-});
-
-// 스와이프 처리 함수
-function handleSwipe() {
-    const deltaX = touchEndX - touchStartX;
-    if (deltaX > 50) {
-        movePrev(); // 👉 오른쪽으로 스와이프 (이전 카드)
-    } else if (deltaX < -50) {
-        moveNext(); // 👈 왼쪽으로 스와이프 (다음 카드)
-    }
-}
-
-updateCarousel();
-});
-
-function toggleAdditional() {
-    const box = document.getElementById('additional-leadership-box');
-    const btn = document.querySelector('.toggle-additional-btn');
-    const leadershipCard = document.querySelector('.card.leadership');
-    
-    if (box.style.display === 'none' || box.style.display === '') {
-    box.style.display = 'block';
-    btn.textContent = '－ Hide Leadership';
-    leadershipCard.classList.add('scrollable'); // ✅ 스크롤 가능하게
-    } else {
-    box.style.display = 'none';
-    btn.textContent = '＋ View 6 More Leadership';
-    leadershipCard.classList.remove('scrollable'); // ✅ 다시 스크롤 비활성화
-    leadershipCard.scrollTop = 0; // 💡 스크롤 위치도 초기화
-    }
-}
-
-function toggleProjectGrid() {
-    const grid = document.querySelector('.tech-all-projects');
-    const btn = document.getElementById('toggle-projects-btn');
-    const card = document.querySelector('.card.tech');
-    const techOne = document.querySelector('.tech-one');
-    const initial = document.querySelector('.initial-tech-project');
-
-    const isActive = grid.classList.contains('active');
-
-    if (!isActive) {
-        grid.classList.add('active');
-        btn.textContent = '－ Hide Projects';
-
-        card.classList.add('square');
-        card.style.overflow = 'visible';
-
-        techOne?.classList.add('move-up');
-        initial?.classList.add('move-up');
-        btn.classList.add('move-up');
-    } else {
-        grid.classList.remove('active');
-        btn.textContent = '＋ View 6 More Projects';
-
-        card.classList.remove('square');
-
-        techOne?.classList.remove('move-up');
-        initial?.classList.remove('move-up');
-        btn.classList.remove('move-up');
-    }
-}
-  
-const headers = document.querySelectorAll('.accordion-header');
-
-headers.forEach(header => {
-  header.addEventListener('click', () => {
-    const body = header.nextElementSibling;
-    const isOpen = body.classList.contains('open');
-
-    if (isOpen) {
-      body.style.maxHeight = null;
-    } else {
-      body.style.maxHeight = body.scrollHeight + "px";
-    }
-
-    body.classList.toggle('open', !isOpen);
-    header.classList.toggle('active', !isOpen);
-
-    headers.forEach(h => {
-      if (h !== header) {
-        h.classList.remove('active');
-        h.nextElementSibling.classList.remove('open');
-        h.nextElementSibling.style.maxHeight = null;
-      }
-    });
-  });
-});
-
