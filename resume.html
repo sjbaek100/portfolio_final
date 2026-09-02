@@ -1,334 +1,311 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Jiwon Baek — Resume</title>
-<meta content="Jiwon Baek resume — data analytics, systems, controls, technical operations, and project leadership." name="description"/>
+<meta content="Jiwon Baek resume — technology risk, IT audit, data analytics, controls, and technical operations." name="description"/>
 <meta content="#f4f2ed" name="theme-color"/>
 <style>
-    :root{
-      --page:#ffffff;
-      --screen:#f4f2ed;
-      --ink:#111111;
-      --link:#0645ad;
-      --rule:#111111;
-      --ui:#595550;
-      --ui-line:rgba(17,17,17,.16);
-    }
+  :root{
+    --page:#ffffff;
+    --screen:#f4f2ed;
+    --ink:#111111;
+    --link:#0645ad;
+    --rule:#111111;
+    --ui:#595550;
+    --ui-line:rgba(17,17,17,.16);
+  }
+  *{box-sizing:border-box}
+  html{background:var(--screen)}
+  body{
+    margin:0;
+    background:var(--screen);
+    color:var(--ink);
+    font-family:"Times New Roman",Times,serif;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:var(--link)}
+  .resume-ui{
+    width:min(8.5in,calc(100% - 28px));
+    margin:14px auto 10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:12px;
+    color:var(--ui);
+  }
+  .resume-ui a{color:var(--ui);text-decoration:none}
+  .resume-ui a:hover{text-decoration:underline}
+  .resume-ui-actions{display:flex;gap:8px}
+  .resume-ui-actions a{
+    border:1px solid var(--ui-line);
+    background:rgba(255,255,255,.62);
+    padding:7px 10px;
+    border-radius:2px;
+  }
+  .resume-page,.resume-page *{font-family:"Times New Roman",Times,serif}
+  .resume-page{
+    width:8.5in;
+    min-height:11in;
+    margin:0 auto 28px;
+    padding:.40in .47in .38in;
+    background:var(--page);
+    box-shadow:0 10px 34px rgba(0,0,0,.08);
+    font-size:10.6pt;
+    line-height:1.12;
+  }
+  .name{
+    margin:0;
+    text-align:center;
+    font-size:20.5pt;
+    font-weight:700;
+    line-height:1;
+  }
+  .contact{
+    margin:8px 0 12px;
+    text-align:center;
+    font-size:10.45pt;
+    white-space:nowrap;
+  }
+  .contact a{text-decoration:underline}
+  .section{margin-top:8px}
+  .section-title{
+    margin:0;
+    padding:0 0 2px;
+    border-bottom:1.35px solid var(--rule);
+    font-size:11.5pt;
+    font-weight:700;
+    line-height:1.05;
+    text-transform:uppercase;
+  }
+  .skills{
+    margin-top:3px;
+    font-size:10.55pt;
+    line-height:1.16;
+  }
+  .skills-row{
+    display:flex;
+    align-items:baseline;
+    gap:4px;
+    margin:2px 0;
+  }
+  .skills-row.cert{
+    justify-content:space-between;
+    gap:18px;
+    font-weight:700;
+  }
+  .skills-label{font-weight:700}
+  .job{margin-top:6px}
+  .job-head{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:12px;
+    align-items:baseline;
+    font-size:10.55pt;
+    line-height:1.1;
+  }
+  .job-org{font-weight:700}
+  .job-date{white-space:nowrap;text-align:right}
+  .job ul{
+    margin:2px 0 0 26px;
+    padding:0;
+  }
+  .job li{
+    margin:0 0 2px 0;
+    padding-left:4px;
+    line-height:1.16;
+  }
+  .education-row{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:12px;
+    align-items:baseline;
+    margin-top:4px;
+    font-size:10.6pt;
+  }
+  .education-row strong{font-weight:700}
+  .education-degree{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:4px;
+    font-size:10.6pt;
+    font-style:italic;
+  }
 
-    *{box-sizing:border-box}
-    html{background:var(--screen)}
-    body{
-      margin:0;
-      background:var(--screen);
-      color:var(--ink);
-      font-family:"Times New Roman",Times,serif;
-      -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility;
-    }
-
-    a{color:var(--link)}
+  @media(max-width:860px){
+    body{background:#fff}
     .resume-ui{
-      width:min(8.5in,calc(100% - 28px));
-      margin:14px auto 10px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      font-family:Arial,Helvetica,sans-serif;
-      font-size:12px;
-      color:var(--ui);
+      position:sticky;top:0;z-index:10;width:100%;margin:0;padding:10px 12px;
+      background:rgba(244,242,237,.96);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--ui-line);
     }
-    .resume-ui a{
-      color:var(--ui);
-      text-decoration:none;
+    .resume-page{
+      width:100%;min-height:0;margin:0;padding:28px 24px 40px;
+      box-shadow:none;font-size:11pt;
     }
-    .resume-ui a:hover{text-decoration:underline}
-    .resume-ui-actions{display:flex;gap:8px}
-    .resume-ui-actions a{
-      border:1px solid var(--ui-line);
-      background:rgba(255,255,255,.62);
-      padding:7px 10px;
-      border-radius:2px;
-    }
+    .contact{white-space:normal;line-height:1.45}
+    .job-head,.education-row{grid-template-columns:1fr;gap:2px}
+    .job-date{text-align:left}
+    .education-degree{display:block}
+  }
 
-    .resume-page,
-    .resume-page *{
-      font-family:"Times New Roman",Times,serif;
-    }
+  @media(max-width:520px){
+    .resume-ui{font-size:11px}
+    .resume-ui-actions a{padding:6px 8px}
+    .resume-page{padding:24px 18px 36px}
+    .name{font-size:19pt}
+    .section-title{font-size:11.2pt}
+    .skills-row{display:block;margin:4px 0}
+    .skills-row.cert{display:flex;align-items:flex-start}
+    .job ul{margin-left:23px}
+  }
 
+  @media print{
+    @page{size:Letter;margin:0}
+    html,body{background:#fff}
+    .resume-ui{display:none!important}
     .resume-page{
       width:8.5in;
       min-height:11in;
-      margin:0 auto 28px;
-      padding:.44in .48in .42in;
-      background:var(--page);
-      box-shadow:0 10px 34px rgba(0,0,0,.08);
-      font-size:10.85pt;
-      line-height:1.14;
-    }
-
-    .name{
       margin:0;
-      text-align:center;
-      font-size:20.5pt;
-      font-weight:700;
-      line-height:1;
+      padding:.40in .47in .38in;
+      box-shadow:none;
     }
-    .contact{
-      margin:9px 0 14px;
-      text-align:center;
-      font-size:10.8pt;
-      white-space:nowrap;
-    }
-    .contact a{text-decoration:underline}
-
-    .section{margin-top:10px}
-    .section-title{
-      margin:0;
-      padding:0 0 2px;
-      border-bottom:1.35px solid var(--rule);
-      font-size:11.6pt;
-      font-weight:700;
-      line-height:1.05;
-      text-transform:uppercase;
-    }
-
-    .skills{
-      margin-top:3px;
-      font-size:10.9pt;
-      line-height:1.18;
-    }
-    .skills-row{
-      display:flex;
-      align-items:baseline;
-      gap:4px;
-      margin:2px 0;
-    }
-    .skills-row.cert{
-      justify-content:space-between;
-      gap:18px;
-      font-weight:700;
-    }
-    .skills-label{font-weight:700}
-
-    .job{margin-top:7px}
-    .job-head{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      gap:12px;
-      align-items:baseline;
-      font-size:10.75pt;
-      line-height:1.12;
-    }
-    .job-org{font-weight:700}
-    .job-date{
-      white-space:nowrap;
-      text-align:right;
-    }
-    .job ul{
-      margin:3px 0 0 27px;
-      padding:0;
-    }
-    .job li{
-      margin:0 0 3px 0;
-      padding-left:5px;
-      line-height:1.18;
-    }
-
-    .education-row{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      gap:12px;
-      align-items:baseline;
-      margin-top:4px;
-      font-size:10.8pt;
-    }
-    .education-row strong{font-weight:700}
-    .education-degree{
-      margin-top:5px;
-      font-size:10.8pt;
-    }
-
-    @media(max-width:860px){
-      body{background:#fff}
-      .resume-ui{
-        position:sticky;
-        top:0;
-        z-index:10;
-        width:100%;
-        margin:0;
-        padding:10px 12px;
-        background:rgba(244,242,237,.96);
-        backdrop-filter:blur(10px);
-        border-bottom:1px solid var(--ui-line);
-      }
-      .resume-page{
-        width:100%;
-        min-height:0;
-        margin:0;
-        padding:28px 24px 40px;
-        box-shadow:none;
-        font-size:11pt;
-      }
-      .contact{
-        white-space:normal;
-        line-height:1.45;
-      }
-      .job-head,.education-row{
-        grid-template-columns:1fr;
-        gap:2px;
-      }
-      .job-date{text-align:left}
-    }
-
-    @media(max-width:520px){
-      .resume-ui{font-size:11px}
-      .resume-ui-actions a{padding:6px 8px}
-      .resume-page{padding:24px 18px 36px}
-      .name{font-size:19pt}
-      .section-title{font-size:11.2pt}
-      .skills-row{
-        display:block;
-        margin:4px 0;
-      }
-      .skills-row.cert{
-        display:flex;
-        align-items:flex-start;
-      }
-      .job ul{margin-left:23px}
-    }
-
-    @media print{
-      @page{size:Letter;margin:0}
-      html,body{background:#fff}
-      .resume-ui{display:none!important}
-      .resume-page{
-        width:8.5in;
-        min-height:11in;
-        margin:0;
-        padding:.44in .48in .42in;
-        box-shadow:none;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 <nav aria-label="Resume actions" class="resume-ui">
-<a href="index.html">← Portfolio</a>
-<div class="resume-ui-actions">
-<a href="Jiwon_Baek_Resume.pdf" rel="noopener" target="_blank">Open PDF</a>
-<a download="" href="Jiwon_Baek_Resume.pdf">Download PDF ↓</a>
-</div>
+  <a href="index.html">← Portfolio</a>
+  <div class="resume-ui-actions">
+    <a href="Jiwon_Baek_Resume.pdf" rel="noopener" target="_blank">Open PDF</a>
+    <a download="" href="Jiwon_Baek_Resume.pdf">Download PDF ↓</a>
+  </div>
 </nav>
+
 <main class="resume-page">
 <header>
-<h1 class="name">Jiwon Baek</h1>
-<p class="contact">
+  <h1 class="name">Jiwon Baek</h1>
+  <p class="contact">
     Austin, TX | Open to Relocation | <a href="tel:+15302207145">(530) 220-7145</a> |
     <a href="mailto:bjiwon766@gmail.com">bjiwon766@gmail.com</a> |
     <a href="https://www.linkedin.com/in/jionebaek/" rel="noopener" target="_blank">LinkedIn</a> |
     <a href="https://jiwonbaek.kro.kr/" rel="noopener" target="_blank">Portfolio</a> |
     <a href="https://github.com/sjbaek100" rel="noopener" target="_blank">GitHub</a>
-</p>
+  </p>
 </header>
+
 <section class="section">
-<h2 class="section-title">Skills &amp; Certifications</h2>
-<div class="skills">
-<div class="skills-row cert">
-<span><span class="skills-label">Certified Information Systems Auditor (CISA) Exam Passed</span> | ISACA</span>
-<span>February 2026 | Score: 699/800</span>
-</div>
-<div class="skills-row">
-<span><span class="skills-label">Data &amp; Analytics:</span> Excel (PivotTables, VLOOKUP), SQL, Python, R, P&amp;L Analysis, Budgeting, Reporting</span>
-</div>
-<div class="skills-row">
-<span><span class="skills-label">Systems &amp; Controls:</span> System Validation, Requirements Analysis, Root Cause Analysis, PLM Ticketing, ITGCs, Application Controls, Access Controls (RBAC), Audit Logging</span>
-</div>
-<div class="skills-row">
-<span><span class="skills-label">Technical Tools:</span> Wireshark, QXDM, QCAT, STAR, ELT, Odin, FDM</span>
-</div>
-<div class="skills-row">
-<span><span class="skills-label">Languages:</span> English (Bilingual), Korean (Bilingual), Chinese (Limited Working Proficiency)</span>
-</div>
-</div>
+  <h2 class="section-title">Skills &amp; Certifications</h2>
+  <div class="skills">
+    <div class="skills-row cert">
+      <span><span class="skills-label">Certified Information Systems Auditor (CISA) Exam Passed</span> | ISACA</span>
+      <span>February 2026 | Score: 699/800</span>
+    </div>
+    <div class="skills-row">
+      <span><span class="skills-label">Data &amp; Analytics:</span> Excel (PivotTables, VLOOKUP), SQL, Python, R, P&amp;L Analysis, Budgeting, Reporting</span>
+    </div>
+    <div class="skills-row">
+      <span><span class="skills-label">Technology Risk &amp; Controls:</span> ITGCs, Application Controls, Logical Access, RBAC, Risk Assessment, Control Testing, Evidence Review, Exception Analysis, Remediation Tracking, Audit Documentation</span>
+    </div>
+    <div class="skills-row">
+      <span><span class="skills-label">Technical Tools:</span> Wireshark, QXDM, QCAT, STAR, ELT, Odin, FDM</span>
+    </div>
+    <div class="skills-row">
+      <span><span class="skills-label">Languages:</span> English (Bilingual), Korean (Bilingual), Chinese (Limited Working Proficiency)</span>
+    </div>
+  </div>
 </section>
+
 <section class="section">
-<h2 class="section-title">Experience</h2>
-<article class="job">
-<div class="job-head">
-<div><span class="job-org">LS Electric America</span> | Application Engineer | Bastrop, TX</div>
-<div class="job-date">06/2026–Present</div>
-</div>
-<ul>
-<li>Review technical specifications, drawings, customer requirements, and applicable standards to identify discrepancies and implementation requirements.</li>
-<li>Translate customer requirements into technical specifications and coordinate with engineering and sales to resolve technical issues.</li>
-</ul>
-</article>
-<article class="job">
-<div class="job-head">
-<div><span class="job-org">Samsung Electronics America</span> (via JND Inc.) | Software QA Engineer | Plano, TX</div>
-<div class="job-date">06/2025–06/2026</div>
-</div>
-<ul>
-<li>Validated voice, messaging, network registration, SIM/eSIM, CBRS, and service recovery scenarios across multiple U.S. carriers, identifying software and network issues through structured testing and analysis.</li>
-<li>Investigated software, modem, SIM, and network issues using packet traces and diagnostic logs; reproduced defects, identified potential root causes, and documented findings with reproduction steps, logs, and screenshots.</li>
-<li>Managed PLM tickets from initial reporting through investigation, retesting, and closure; coordinated fix verification with engineering teams and prepared recurring reports on issue trends and resolution status.</li>
-</ul>
-</article>
-<article class="job">
-<div class="job-head">
-<div><span class="job-org">University of California, Davis</span> | Instructional Technology Intern | Davis, CA</div>
-<div class="job-date">11/2024–06/2025</div>
-</div>
-<ul>
-<li>Supported 40+ undergraduate students through computer labs and office hours, resolving issues involving Excel, Microsoft Office, Google Workspace, RStudio, and LibreOffice and contributing to instructional materials.</li>
-</ul>
-</article>
-<article class="job">
-<div class="job-head">
-<div><span class="job-org">Kelly &amp; Stephan</span> | Business Operations Intern | Seoul, Korea</div>
-<div class="job-date">05/2022–09/2022</div>
-</div>
-<ul>
-<li>Analyzed P&amp;L and product profitability, recommending the discontinuation of an underperforming product and contributing to a 2% increase in overall profit.</li>
-<li>Developed an internal quotation automation tool with pricing logic, approval workflows, and access restricted to authorized internal users, reducing quotation turnaround time by 30%.</li>
-</ul>
-</article>
+  <h2 class="section-title">Experience</h2>
+
+  <article class="job">
+    <div class="job-head">
+      <div><span class="job-org">LS Electric America</span> | Application Engineer | Bastrop, TX</div>
+      <div class="job-date">06/2026–Present</div>
+    </div>
+    <ul>
+      <li>Review technical specifications, drawings, customer requirements, and applicable standards to identify discrepancies and implementation requirements.</li>
+      <li>Translate customer requirements into technical specifications and coordinate with engineering and sales to resolve technical issues.</li>
+    </ul>
+  </article>
+
+  <article class="job">
+    <div class="job-head">
+      <div><span class="job-org">Samsung Electronics America</span> (via JND Inc.) | Software QA Engineer | Plano, TX</div>
+      <div class="job-date">06/2025–06/2026</div>
+    </div>
+    <ul>
+      <li>Validated voice, messaging, network registration, SIM/eSIM, CBRS, and service recovery scenarios across multiple U.S. carriers, identifying software and network issues through structured testing and analysis.</li>
+      <li>Investigated software, modem, SIM, and network issues using packet traces and diagnostic logs; reproduced defects, identified potential root causes, and documented findings with reproduction steps, logs, and screenshots.</li>
+      <li>Managed PLM tickets from initial reporting through investigation, retesting, and closure; coordinated fix verification with engineering teams and prepared recurring reports on issue trends and resolution status.</li>
+    </ul>
+  </article>
+
+  <article class="job">
+    <div class="job-head">
+      <div><span class="job-org">University of California, Davis</span> | Instructional Technology Intern | Davis, CA</div>
+      <div class="job-date">11/2024–06/2025</div>
+    </div>
+    <ul>
+      <li>Supported 40+ undergraduate students through computer labs and office hours, resolving issues involving Excel, Microsoft Office, Google Workspace, RStudio, and LibreOffice and contributing to instructional materials.</li>
+    </ul>
+  </article>
+
+  <article class="job">
+    <div class="job-head">
+      <div><span class="job-org">Kelly &amp; Stephan</span> | Business Operations Intern | Seoul, Korea</div>
+      <div class="job-date">05/2022–09/2022</div>
+    </div>
+    <ul>
+      <li>Analyzed P&amp;L and product profitability, recommending the discontinuation of an underperforming product and contributing to a 2% increase in overall profit.</li>
+      <li>Developed an internal quotation automation tool with pricing logic, approval workflows, and access restricted to authorized internal users, reducing quotation turnaround time by 30%.</li>
+    </ul>
+  </article>
 </section>
+
 <section class="section">
-<h2 class="section-title">Leadership &amp; Projects</h2>
-<article class="job">
-<div class="job-head">
-<div><span class="job-org">Korean-American Scientists and Engineers Association (KSEA)</span> | VP &amp; Treasurer | Davis, CA</div>
-<div class="job-date">01/2023–06/2025</div>
-</div>
-<ul>
-<li>Managed budgeting, expense tracking, reimbursements, financial reporting, and resource allocation, increasing annual net operating surplus by more than 7x.</li>
-<li>Built a member portal using Next.js, TypeScript, Prisma, and PostgreSQL with JWT authentication, role-based access (RBAC), and admin approval; implemented audit logging to support secure, traceable administration.</li>
-<li>Developed and operated an automated photo booth system using Python, Flask, OpenCV, and QR-based delivery, serving more than 600 users and reducing average session turnaround time by approximately 75%.</li>
-</ul>
-</article>
-<article class="job">
-<div class="job-head">
-<div><span class="job-org">LIKELION USA</span> | Technical Project Lead &amp; Full-Stack Developer | Davis, CA</div>
-<div class="job-date">03/2024–06/2025</div>
-</div>
-<ul>
-<li>Led an AI recipe-generator project from planning through presentation, managing milestones in Notion and delivering a full-stack web application built with React, PostgreSQL, and the OpenAI API.</li>
-<li>Built a Python- and NLP-based sentiment-analysis dashboard for $Talk; placed second after a 400:1 selection process at LIKELION Global’s 2025 Silicon Valley Hackathon.</li>
-</ul>
-</article>
+  <h2 class="section-title">Leadership &amp; Projects</h2>
+
+  <article class="job">
+    <div class="job-head">
+      <div><span class="job-org">Technology Risk &amp; Controls Assessment</span> | Independent Portfolio Project | <a href="https://jiwonbaek-techrisk.kro.kr/" rel="noopener" target="_blank">Link</a></div>
+    </div>
+    <ul>
+      <li>Built an access review and control assessment tool to evaluate terminated-user access, privileged access approvals, and dormant accounts using configurable risk criteria.</li>
+      <li>Performed simulated control testing and exception analysis, documenting findings, evidence, risk ratings, and remediation considerations in audit-style reports.</li>
+      <li>Generated executive summaries and exception reports to support review of control deficiencies, affected accounts, and remediation priorities.</li>
+    </ul>
+  </article>
+
+  <article class="job">
+    <div class="job-head">
+      <div><span class="job-org">Korean-American Scientists and Engineers Association (KSEA)</span> | Vice President &amp; Treasurer | Davis, CA</div>
+      <div class="job-date">01/2023–06/2025</div>
+    </div>
+    <ul>
+      <li>Managed budgeting, expense tracking, reimbursements, financial reporting, and resource allocation, increasing annual net operating surplus by more than 7x.</li>
+      <li>Built a member portal using Next.js, TypeScript, Prisma, and PostgreSQL with JWT authentication, role-based access (RBAC), and admin approval; implemented audit logging to support secure, traceable administration.</li>
+    </ul>
+  </article>
 </section>
+
 <section class="section">
-<h2 class="section-title">Education</h2>
-<div class="education-row">
-<strong>University of California, Davis</strong>
-<span>09/2022–06/2025</span>
-</div>
-<p class="education-degree">Bachelor of Science in Statistics | Minor in Computer Science</p>
+  <h2 class="section-title">Education</h2>
+  <div class="education-row">
+    <strong>University of California, Davis</strong>
+    <span>09/2022–06/2025</span>
+  </div>
+  <p class="education-degree">
+    <span>Bachelor of Science in Statistics | Minor in Computer Science</span>
+    <span>GPA: 3.4/4.0</span>
+  </p>
 </section>
 </main>
 </body>
