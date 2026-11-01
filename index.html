@@ -51,9 +51,73 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.08}:focus-v
 .hero-focus{border-top:1px solid var(--line);padding-top:16px;display:grid}.hero-focus-row{display:grid;grid-template-columns:26px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}.hero-focus-row:last-child{border-bottom:0}.hero-focus-no{font-family:var(--mono);font-size:.72rem;color:var(--gold);padding-top:1px}.hero-focus-row strong{display:block;font-family:var(--display);font-size:.95rem;font-weight:600;letter-spacing:-.01em}.hero-focus-row span{display:block;font-size:.76rem;color:var(--soft);margin-top:2px;line-height:1.45}
 
 /* CISA */
-.cisa{background:var(--dark);color:var(--cream);padding:0 var(--gutter)}.cisa-credly-badge{min-height:270px;display:flex;align-items:center;justify-content:flex-start}.cisa-credly-badge iframe{max-width:150px}
-
-.cisa-main{max-width:var(--max);margin:0 auto;min-height:290px;display:grid;grid-template-columns:170px 1.05fr .52fr .72fr auto;gap:28px;align-items:center}.cisa-label small{display:block;color:#c9a361;font-size:.68rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;margin-bottom:5px;font-family:var(--mono)}.cisa-label strong{font-family:var(--display);font-size:clamp(1.5rem,3vw,2.35rem);font-weight:600;letter-spacing:-.015em}.cisa-score{display:flex;align-items:baseline;gap:7px}.cisa-score strong{font-family:var(--display);font-size:clamp(3rem,5.5vw,4.5rem);line-height:.8;font-weight:600;letter-spacing:-.045em}.cisa-score span{color:rgba(245,239,228,.5);font-weight:700}.cisa-meta{font-size:.78rem;color:rgba(245,239,228,.58)}.cisa-meta strong{display:block;color:var(--cream);font-size:.87rem;font-weight:700}.cisa-toggle{border:1px solid rgba(245,239,228,.2);color:var(--cream);padding:10px 14px;font-size:.76rem;font-weight:800;white-space:nowrap;font-family:var(--mono);transition:border-color .2s var(--ease),color .2s var(--ease)}.cisa-toggle:hover{border-color:#c9a361;color:#c9a361}.cisa-details{max-width:var(--max);margin:0 auto;display:grid;grid-template-rows:0fr;opacity:0;padding-bottom:0;transition:grid-template-rows .38s var(--ease),opacity .28s var(--ease),padding-bottom .38s var(--ease)}.cisa-details.open{grid-template-rows:1fr;opacity:1;padding-bottom:38px}.cisa-details>.cisa-detail-grid{min-height:0;overflow:hidden;padding-top:0;border-top-color:transparent;transition:padding-top .38s var(--ease),border-color .38s var(--ease);display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.34fr);gap:54px}.cisa-details.open>.cisa-detail-grid{padding-top:30px;border-top:1px solid var(--dark-line)}.domain-list{border-top:1px solid var(--dark-line)}.domain-row{display:grid;grid-template-columns:38px minmax(0,1fr) 64px;gap:16px;align-items:center;min-height:56px;border-bottom:1px solid var(--dark-line);transition:background .2s var(--ease)}.domain-row:hover{background:rgba(245,239,228,.025)}.domain-rank{font-size:.62rem;font-weight:800;letter-spacing:.1em;color:#c9a361;font-family:var(--mono)}.domain-name{color:rgba(245,239,228,.74);font-size:.78rem;line-height:1.4}.domain-row strong{font-family:var(--display);font-size:1.3rem;font-weight:600;text-align:right}.cisa-summary strong{display:block;color:var(--cream);font-family:var(--display);font-size:1.3rem;margin-bottom:10px;font-weight:600}.cisa-summary p{line-height:1.65;color:rgba(245,239,228,.62);font-size:.81rem}
+.cisa{background:var(--dark);color:var(--cream);padding:0 var(--gutter)}
+.cisa-main{
+  max-width:var(--max);margin:0 auto;min-height:190px;
+  display:grid;grid-template-columns:118px minmax(0,1.45fr) .48fr .62fr auto;
+  gap:30px;align-items:center
+}
+.cisa-credly-badge{
+  width:108px;height:194px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center
+}
+.cisa-credly-badge>div{
+  width:150px;height:270px;
+  transform:scale(.72);
+  transform-origin:center center;
+  flex:0 0 150px
+}
+.cisa-label small{
+  display:block;color:#c9a361;font-size:.66rem;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;margin-bottom:7px;font-family:var(--mono)
+}
+.cisa-label strong{
+  display:block;font-family:var(--display);
+  font-size:clamp(1.5rem,2.5vw,2.2rem);
+  font-weight:600;letter-spacing:-.018em;line-height:1.12
+}
+.cisa-credential-note{
+  margin-top:9px;color:rgba(245,239,228,.58);
+  font-size:.74rem;font-family:var(--mono)
+}
+.cisa-score{display:flex;align-items:baseline;gap:6px}
+.cisa-score strong{
+  font-family:var(--display);font-size:clamp(2.4rem,4vw,3.35rem);
+  line-height:.85;font-weight:600;letter-spacing:-.04em
+}
+.cisa-score span{color:rgba(245,239,228,.42);font-weight:700;font-size:.9rem}
+.cisa-meta{font-size:.74rem;color:rgba(245,239,228,.54);line-height:1.55}
+.cisa-meta strong{display:block;color:var(--cream);font-size:.82rem;font-weight:700}
+.cisa-meta span{display:block;margin-top:2px}
+.cisa-toggle{
+  border:1px solid rgba(245,239,228,.2);color:var(--cream);
+  padding:10px 14px;font-size:.74rem;font-weight:800;white-space:nowrap;
+  font-family:var(--mono);transition:border-color .2s var(--ease),color .2s var(--ease)
+}
+.cisa-toggle:hover{border-color:#c9a361;color:#c9a361}
+.cisa-details{
+  max-width:var(--max);margin:0 auto;display:grid;grid-template-rows:0fr;
+  opacity:0;padding-bottom:0;
+  transition:grid-template-rows .38s var(--ease),opacity .28s var(--ease),padding-bottom .38s var(--ease)
+}
+.cisa-details.open{grid-template-rows:1fr;opacity:1;padding-bottom:38px}
+.cisa-details>.cisa-detail-grid{
+  min-height:0;overflow:hidden;padding-top:0;border-top-color:transparent;
+  transition:padding-top .38s var(--ease),border-color .38s var(--ease);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.34fr);gap:54px
+}
+.cisa-details.open>.cisa-detail-grid{padding-top:30px;border-top:1px solid var(--dark-line)}
+.domain-list{border-top:1px solid var(--dark-line)}
+.domain-row{
+  display:grid;grid-template-columns:38px minmax(0,1fr) 64px;gap:16px;align-items:center;
+  min-height:56px;border-bottom:1px solid var(--dark-line);transition:background .2s var(--ease)
+}
+.domain-row:hover{background:rgba(245,239,228,.025)}
+.domain-rank{font-size:.62rem;font-weight:800;letter-spacing:.1em;color:#c9a361;font-family:var(--mono)}
+.domain-name{color:rgba(245,239,228,.74);font-size:.78rem;line-height:1.4}
+.domain-row strong{font-family:var(--display);font-size:1.3rem;font-weight:600;text-align:right}
+.cisa-summary strong{display:block;color:var(--cream);font-family:var(--display);font-size:1.3rem;margin-bottom:10px;font-weight:600}
+.cisa-summary p{line-height:1.65;color:rgba(245,239,228,.62);font-size:.81rem}
 
 /* Experience */
 .experience{background:var(--paper)}.exp-list{border-top:1px solid var(--line-strong)}.exp-item{position:relative;display:grid;grid-template-columns:62px 220px minmax(0,1fr);gap:25px;padding:32px 0;border-bottom:1px solid var(--line);transition:background .22s var(--ease)}.exp-item:first-child{padding-top:36px}.exp-item-progress{position:absolute;z-index:3;top:-1px;left:0;right:0;height:2px;background:var(--line);overflow:hidden;pointer-events:none}.exp-item-progress span{display:block;width:0!important;height:100%;background:var(--gold);transform-origin:left center;transition:width .6s var(--ease)}.exp-item-progress.is-visible span{width:var(--exp-step-target)!important}.exp-item.active-experience{background:linear-gradient(90deg,rgba(152,110,49,.03),transparent 42%)}.exp-item.active-experience .exp-index{color:var(--gold)}.exp-item.active-experience .exp-org{color:var(--ink)}.exp-index{font-family:var(--mono);font-size:1.05rem;color:var(--faint);padding-top:2px}.exp-org{font-family:var(--display);font-size:1.06rem;font-weight:600;letter-spacing:-.01em}.exp-role{font-size:.87rem;color:var(--soft);margin-top:4px}.exp-meta{font-size:.72rem;color:var(--faint);margin-top:7px;line-height:1.5;font-family:var(--mono)}.bullets{display:grid;gap:9px}.bullets li{position:relative;padding-left:14px;color:var(--soft);font-size:.85rem;line-height:1.62;max-width:78ch}.bullets li::before{content:"";position:absolute;left:0;top:.68em;width:5px;height:1px;background:var(--gold)}.tags{display:flex;flex-wrap:wrap;gap:7px;row-gap:8px;margin-top:16px}.tags span{font-size:.74rem;color:var(--soft);border:1px solid var(--line);padding:5px 9px;font-family:var(--mono);transition:border-color .2s var(--ease)}.exp-item:hover .tags span{border-color:rgba(152,110,49,.24)}
@@ -119,7 +183,34 @@ footer{background:var(--dark);color:rgba(245,239,228,.5);padding:26px var(--gutt
 @media(max-width:480px){.project-strip{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important;animation-duration:.001ms!important}.reveal{opacity:1;transform:none}}
   </style>
- </head>
+ 
+<style id="cisa-compact-responsive">
+@media(max-width:1000px){
+  .cisa-main{grid-template-columns:110px minmax(0,1fr) auto;gap:22px;padding:12px 0}
+  .cisa-credly-badge{grid-row:1/3}
+  .cisa-score{justify-self:end}
+  .cisa-meta{grid-column:2/3}
+  .cisa-toggle{grid-column:3/4;grid-row:2}
+}
+@media(max-width:700px){
+  .cisa-main{grid-template-columns:92px 1fr;padding:18px 0 20px;gap:16px 18px}
+  .cisa-credly-badge{width:86px;height:155px;grid-row:1/4}
+  .cisa-credly-badge>div{transform:scale(.575)}
+  .cisa-label strong{font-size:1.45rem}
+  .cisa-score{grid-column:2;justify-self:start}
+  .cisa-meta{grid-column:2}
+  .cisa-toggle{grid-column:2;grid-row:auto;justify-self:start}
+}
+@media(max-width:480px){
+  .cisa-main{grid-template-columns:1fr;text-align:center}
+  .cisa-credly-badge{grid-row:auto;justify-self:center}
+  .cisa-label,.cisa-score,.cisa-meta,.cisa-toggle{grid-column:1}
+  .cisa-score{justify-self:center}
+  .cisa-toggle{justify-self:center}
+}
+</style>
+
+</head>
  <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-nav" id="nav">
@@ -160,8 +251,16 @@ footer{background:var(--dark);color:rgba(245,239,228,.5);padding:26px var(--gutt
 <div class="cisa-credly-badge" aria-label="Official CISA digital credential">
   <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="4bc38aad-4848-409d-bd51-61cce8a3f4e2" data-share-badge-host="https://www.credly.com"></div>
 </div>
-<div class="cisa-label"><small>Professional Credential</small><strong>Certified Information Systems Auditor (CISA)</strong><p class="cisa-credential-note">Certified · ISACA</p></div><div class="cisa-score"><strong>699</strong><span>/ 800</span></div><div class="cisa-meta"><strong>ISACA</strong><span>Exam passed &middot; February 2026</span></div><button aria-controls="cisaDetails" aria-expanded="false" class="cisa-toggle" id="cisaToggle" type="button">View domain scores &darr;</button></div>
-    <div class="cisa-details" id="cisaDetails"><div class="cisa-detail-grid"><div aria-label="CISA domain scores" class="domain-list"><div class="domain-row"><span class="domain-rank">01</span><span class="domain-name">Governance and Management of IT</span><strong>754</strong></div><div class="domain-row"><span class="domain-rank">02</span><span class="domain-name">Information Systems Acquisition, Development, and Implementation</span><strong>726</strong></div><div class="domain-row"><span class="domain-rank">03</span><span class="domain-name">Information Systems Auditing Process</span><strong>699</strong></div><div class="domain-row"><span class="domain-rank">04</span><span class="domain-name">Information Systems Operations and Business Resilience</span><strong>690</strong></div><div class="domain-row"><span class="domain-rank">05</span><span class="domain-name">Protection of Information Assets</span><strong>662</strong></div></div><aside class="cisa-summary"><strong>Performance across all five CISA domains</strong><p>ISACA domain results are scaled scores and are shown here for additional context, not as percentages.</p></aside></div></div>
+<div class="cisa-label">
+  <small>Professional Credential</small>
+  <strong>CISA · Certified Information Systems Auditor</strong>
+  <p class="cisa-credential-note">Certified by ISACA</p>
+</div>
+<div class="cisa-score"><strong>699</strong><span>/ 800</span></div>
+<div class="cisa-meta"><strong>Exam score</strong><span>Passed February 2026</span></div>
+<button aria-controls="cisaDetails" aria-expanded="false" class="cisa-toggle" id="cisaToggle" type="button">View domain scores ↓</button>
+</div>
+<div class="cisa-details" id="cisaDetails"><div class="cisa-detail-grid"><div aria-label="CISA domain scores" class="domain-list"><div class="domain-row"><span class="domain-rank">01</span><span class="domain-name">Governance and Management of IT</span><strong>754</strong></div><div class="domain-row"><span class="domain-rank">02</span><span class="domain-name">Information Systems Acquisition, Development, and Implementation</span><strong>726</strong></div><div class="domain-row"><span class="domain-rank">03</span><span class="domain-name">Information Systems Auditing Process</span><strong>699</strong></div><div class="domain-row"><span class="domain-rank">04</span><span class="domain-name">Information Systems Operations and Business Resilience</span><strong>690</strong></div><div class="domain-row"><span class="domain-rank">05</span><span class="domain-name">Protection of Information Assets</span><strong>662</strong></div></div><aside class="cisa-summary"><strong>Performance across all five CISA domains</strong><p>ISACA domain results are scaled scores and are shown here for additional context, not as percentages.</p></aside></div></div>
    </section>
 
    <section class="section experience" id="experience">
