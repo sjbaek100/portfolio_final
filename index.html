@@ -52,20 +52,43 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.08}:focus-v
 
 /* CISA */
 .cisa{background:var(--dark);color:var(--cream);padding:0 var(--gutter)}
+
+.cisa-badge-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100px;
+  height:100px;
+  transition:transform .2s var(--ease),opacity .2s var(--ease);
+}
+.cisa-badge-link:hover{
+  transform:translateY(-2px);
+  opacity:.92;
+}
+.cisa-badge-img{
+  width:92px;
+  height:92px;
+  object-fit:contain;
+  display:block;
+}
+.cisa-verify{
+  display:inline-block;
+  margin-top:10px;
+  color:#c9a361;
+  font-size:.72rem;
+  font-weight:800;
+  font-family:var(--mono);
+  border-bottom:1px solid rgba(201,163,97,.35);
+  padding-bottom:2px;
+}
+.cisa-verify:hover{
+  border-color:#c9a361;
+}
+
 .cisa-main{
   max-width:var(--max);margin:0 auto;min-height:190px;
-  display:grid;grid-template-columns:118px minmax(0,1.45fr) .48fr .62fr auto;
+  display:grid;grid-template-columns:110px minmax(0,1.45fr) .48fr .62fr auto;
   gap:30px;align-items:center
-}
-.cisa-credly-badge{
-  width:108px;height:194px;overflow:hidden;
-  display:flex;align-items:center;justify-content:center
-}
-.cisa-credly-badge>div{
-  width:150px;height:270px;
-  transform:scale(.72);
-  transform-origin:center center;
-  flex:0 0 150px
 }
 .cisa-label small{
   display:block;color:#c9a361;font-size:.66rem;font-weight:800;
@@ -176,40 +199,30 @@ footer{background:var(--dark);color:rgba(245,239,228,.5);padding:26px var(--gutt
 .modal{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .2s var(--ease)}.modal.open{opacity:1;pointer-events:auto}.modal-bg{position:absolute;inset:0;background:rgba(10,9,7,.76);backdrop-filter:blur(4px)}.modal-panel{position:relative;z-index:1;width:min(760px,100%);max-height:86vh;overflow:auto;background:var(--paper);padding:clamp(28px,5vw,50px);border:1px solid var(--line);transform:translateY(10px);opacity:0;transition:transform .28s var(--ease),opacity .22s var(--ease)}.modal.open .modal-panel{transform:none;opacity:1}.modal-close{position:absolute;right:17px;top:17px;width:35px;height:35px;border:1px solid var(--line-strong);transition:border-color .2s var(--ease),color .2s var(--ease)}.modal-close:hover{border-color:var(--gold);color:var(--gold)}.modal-kicker{font-size:.68rem;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.11em;font-family:var(--mono)}.modal-title{font-size:clamp(1.9rem,4vw,2.6rem);margin-top:7px;padding-right:42px;letter-spacing:-.02em}.modal-sub{font-size:.8rem;color:var(--faint);margin-top:6px}.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-top:27px}.modal-block h4{font-family:var(--body);font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;margin-bottom:7px;color:var(--faint)}.modal-block p,.modal-block li{font-size:.84rem;color:var(--soft)}.modal-block li{margin:5px 0;font-family:var(--mono);font-size:.78rem}.modal-full{grid-column:1/-1}.arch{padding:20px 22px;font-size:.8rem;line-height:1.8;min-height:100px;display:flex;align-items:center;font-family:var(--mono);white-space:pre-wrap;color:var(--soft);border:1px solid var(--line);border-left:2px solid var(--gold);background:linear-gradient(90deg,rgba(152,110,49,.07),transparent 72%),var(--alt)}.result-figures{display:flex;gap:34px;flex-wrap:wrap;margin-top:4px}.result-figures div strong{display:block;font-family:var(--display);font-size:1.8rem;font-weight:600;letter-spacing:-.04em}.result-figures div span{display:block;font-size:.66rem;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
 
 @media(max-width:1100px){.project-hero-main{grid-template-columns:1fr;gap:22px;align-items:start}.project-hero .project-result{max-width:68ch}.project-secondary-grid{grid-template-columns:1fr 1fr}.project-secondary:last-child{grid-column:1/-1}}
-@media(max-width:1000px){.cisa-main{grid-template-columns:170px 1fr .55fr}.cisa-credly-badge{grid-row:1/3}.cisa-meta{grid-column:2/4}.cisa-toggle{grid-column:1/-1}.project-strip{grid-template-columns:repeat(3,1fr)}.hero-grid{grid-template-columns:1fr}.cisa-main{grid-template-columns:1fr .55fr .7fr}.cisa-toggle{grid-column:1/-1;justify-self:start;margin-bottom:22px}.cisa-details>.cisa-detail-grid{grid-template-columns:1fr}.cisa-summary{border-top:1px solid var(--dark-line);padding-top:20px}.analysis-item{grid-template-columns:44px minmax(0,1fr)}.analysis-highlight,.analysis-note{grid-column:1/-1;margin-top:14px;margin-left:44px}.analysis-note{border-left:1px solid var(--line);padding-left:0;padding-top:14px;border-top:1px solid var(--line)}}
-@media(max-width:760px){.nav-links{display:none}.nav-toggle{display:block}.hero h1{font-size:clamp(2.6rem,11vw,3.6rem)}.exp-item{grid-template-columns:38px minmax(0,1fr);gap:10px 14px}.exp-index{grid-column:1;grid-row:1;padding-top:3px}.exp-item>.exp-index+div{grid-column:2;grid-row:1;min-width:0}.exp-item>div:last-child{grid-column:2;grid-row:2;min-width:0;margin-top:5px}.evidence-table{display:block;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.skill-row{grid-template-columns:32px minmax(0,1fr);gap:8px 12px}.skill-index{grid-column:1;grid-row:1}.skill-title{grid-column:2;grid-row:1}.skill-tags{grid-column:2}.domain-row{grid-template-columns:1fr 54px}.gallery-wall{display:flex;flex-direction:column;gap:14px}.project-hero{padding:24px 20px 22px}.project-hero::after{display:none}.project-hero-main{padding:18px 0 20px;gap:20px}.project-identity{gap:16px}.project-hero .project-visual{width:68px;height:68px}.project-hero .project-visual img{max-width:64px;max-height:60px}.project-hero h3{font-size:1.4rem}.project-primary-actions{width:100%;flex-direction:column;align-items:stretch}.project-primary-cta,.project-demo-cta{width:100%;margin-top:0!important}.control-summary{grid-template-columns:1fr}.control-summary>div{padding:14px 0}.control-summary>div+div{border-left:0;border-top:1px solid var(--line);padding-left:0}.project-secondary-grid{display:flex;flex-direction:column}.project-secondary{min-height:0}.project-strip{grid-template-columns:1fr 1fr}.mini{border-bottom:1px solid var(--line)}.analysis-highlight,.analysis-note{margin-left:0}.more-grid{grid-template-columns:1fr;gap:34px}.about-grid{grid-template-columns:1fr;gap:38px}.modal{padding:0;align-items:end}.modal-panel{width:100%;max-height:92vh;border-left:0;border-right:0;border-bottom:0;padding:28px 20px 34px}.modal-grid{grid-template-columns:1fr;gap:22px}.modal-full{grid-column:auto}}
-@media(max-width:640px){.evidence-table{display:block;overflow-x:auto;white-space:nowrap}}
-@media(max-width:500px){.cisa-main{grid-template-columns:1fr;padding:22px 0 26px}.cisa-credly-badge{grid-row:auto;justify-content:center}.cisa-label{min-width:0;text-align:center}.cisa-score{grid-column:auto;justify-content:center}.cisa-meta{grid-column:auto;text-align:center}.footer-inner{flex-direction:column;align-items:flex-start}}
-@media(max-width:480px){.project-strip{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important;animation-duration:.001ms!important}.reveal{opacity:1;transform:none}}
-  </style>
- 
-<style id="cisa-compact-responsive">
-@media(max-width:1000px){
-  .cisa-main{grid-template-columns:110px minmax(0,1fr) auto;gap:22px;padding:12px 0}
-  .cisa-credly-badge{grid-row:1/3}
-  .cisa-score{justify-self:end}
-  .cisa-meta{grid-column:2/3}
-  .cisa-toggle{grid-column:3/4;grid-row:2}
-}
-@media(max-width:700px){
-  .cisa-main{grid-template-columns:92px 1fr;padding:18px 0 20px;gap:16px 18px}
-  .cisa-credly-badge{width:86px;height:155px;grid-row:1/4}
-  .cisa-credly-badge>div{transform:scale(.575)}
-  .cisa-label strong{font-size:1.45rem}
+@media(max-width:1000px){.cisa-main{grid-template-columns:170px 1fr .55fr}.cisa-label strong{font-size:1.45rem}
   .cisa-score{grid-column:2;justify-self:start}
   .cisa-meta{grid-column:2}
   .cisa-toggle{grid-column:2;grid-row:auto;justify-self:start}
 }
 @media(max-width:480px){
   .cisa-main{grid-template-columns:1fr;text-align:center}
-  .cisa-credly-badge{grid-row:auto;justify-self:center}
+  .cisa-badge-link{grid-row:auto;justify-self:center}
   .cisa-label,.cisa-score,.cisa-meta,.cisa-toggle{grid-column:1}
   .cisa-score{justify-self:center}
   .cisa-toggle{justify-self:center}
 }
 </style>
 
+
+<style id="cisa-final-mobile">
+@media(max-width:600px){
+  .cisa-main{grid-template-columns:1fr;text-align:center}
+  .cisa-badge-link{margin:0 auto;grid-column:1;grid-row:auto}
+  .cisa-score{justify-self:center}
+  .cisa-meta{grid-column:1;text-align:center}
+  .cisa-toggle{grid-column:1;justify-self:center}
+}
+</style>
 </head>
  <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -248,13 +261,28 @@ footer{background:var(--dark);color:rgba(245,239,228,.5);padding:26px var(--gutt
 
    <section aria-label="CISA credential and exam results" class="cisa">
     <div class="cisa-main reveal">
-<div class="cisa-credly-badge" aria-label="Official CISA digital credential">
-  <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="4bc38aad-4848-409d-bd51-61cce8a3f4e2" data-share-badge-host="https://www.credly.com"></div>
-</div>
+
+<a
+  class="cisa-badge-link"
+  href="https://www.credly.com/badges/4bc38aad-4848-409d-bd51-61cce8a3f4e2/public_url"
+  target="_blank"
+  rel="noopener"
+  aria-label="Verify CISA credential on Credly"
+>
+  <img
+    src="certified-information-systems-auditor-cisa.png"
+    alt="Certified Information Systems Auditor (CISA) badge"
+    class="cisa-badge-img"
+  />
+</a>
 <div class="cisa-label">
   <small>Professional Credential</small>
   <strong>CISA · Certified Information Systems Auditor</strong>
   <p class="cisa-credential-note">Certified by ISACA</p>
+<a class="cisa-verify"
+   href="https://www.credly.com/badges/4bc38aad-4848-409d-bd51-61cce8a3f4e2/public_url"
+   target="_blank"
+   rel="noopener">Verify Credential ↗</a>
 </div>
 <div class="cisa-score"><strong>699</strong><span>/ 800</span></div>
 <div class="cisa-meta"><strong>Exam score</strong><span>Passed February 2026</span></div>
@@ -362,6 +390,5 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("year").textContent=new Date().getFullYear();
 });
   </script>
-   <script type="text/javascript" async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
- </body>
+</body>
 </html>
